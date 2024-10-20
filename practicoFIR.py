@@ -9,7 +9,7 @@ lowcut = 1500.0  # Frecuencia inferior de la banda eliminada
 highcut = 2300.0  # Frecuencia superior de la banda eliminada
 
 # Diseño del filtro FIR de banda eliminada
-filtro = firwin(numtaps, [lowcut, highcut], pass_zero=True, fs=fs)
+filtro = firwin(numtaps, [lowcut, highcut], pass_zero='bandstop', fs=fs)
 
 #Guardar los coeficientes del filtro en archivo.txt 
 with open('coeficientes_filtro_FIR.txt', 'w') as f:
