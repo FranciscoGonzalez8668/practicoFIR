@@ -37,7 +37,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '48000'
+    value: '24000'
   states:
     bus_sink: false
     bus_source: false
@@ -49,7 +49,7 @@ blocks:
   id: variable_file_filter_taps
   parameters:
     comment: ''
-    file: D:\Facultad\5to\DSP\PracticoDsp\coeficientes_filtro_FIR.txt
+    file: /Users/nicop/Downloads/practicoFIR-master/tab_tayi.txt
     verbose: 'False'
   states:
     bus_sink: false
@@ -76,7 +76,7 @@ blocks:
     bus_structure: null
     coordinate: [48, 128.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: analog_sig_source_x_0
   id: analog_sig_source_x
   parameters:
@@ -123,6 +123,23 @@ blocks:
     coordinate: [240, 496.0]
     rotation: 0
     state: disabled
+- name: audio_sink_0
+  id: audio_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: ''
+    num_inputs: '1'
+    ok_to_block: 'True'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [688, 180.0]
+    rotation: 0
+    state: enabled
 - name: blocks_throttle2_0
   id: blocks_throttle2
   parameters:
@@ -143,7 +160,7 @@ blocks:
     bus_structure: null
     coordinate: [272, 136.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_throttle2_0_0
   id: blocks_throttle2
   parameters:
@@ -171,7 +188,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    file: D:\Facultad\5to\DSP\PracticoDsp\robot_36.48k.wav
+    file: /Users/nicop/Downloads/practicoFIR-master/martin_m2.wav
     maxoutbuf: '0'
     minoutbuf: '0'
     nchan: '1'
@@ -180,7 +197,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 344.0]
+    coordinate: [56, 320.0]
     rotation: 0
     state: enabled
 - name: fir_filter_xxx_0
@@ -239,7 +256,7 @@ blocks:
     bus_structure: null
     coordinate: [472, 136.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_freq_sink_x_0
   id: qtgui_freq_sink_x
   parameters:
@@ -291,7 +308,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     name: '1.5'
-    nconnections: '2'
+    nconnections: '1'
     norm_window: 'False'
     showports: 'False'
     tr_chan: '0'
@@ -318,7 +335,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 144.0]
+    coordinate: [760, 304.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_0
@@ -375,7 +392,7 @@ blocks:
     marker8: '-1'
     marker9: '-1'
     name: '""'
-    nconnections: '2'
+    nconnections: '1'
     size: '1024'
     srate: samp_rate
     stemplot: 'False'
@@ -415,7 +432,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 336.0]
+    coordinate: [744, 492.0]
     rotation: 0
     state: enabled
 
@@ -425,11 +442,10 @@ connections:
 - [blocks_throttle2_0, '0', fir_filter_xxx_0_1, '0']
 - [blocks_throttle2_0_0, '0', fir_filter_xxx_0, '0']
 - [blocks_wavfile_source_0, '0', blocks_throttle2_0_0, '0']
-- [fir_filter_xxx_0, '0', qtgui_freq_sink_x_0, '1']
-- [fir_filter_xxx_0, '0', qtgui_time_sink_x_0, '1']
-- [fir_filter_xxx_0_1, '0', qtgui_freq_sink_x_0, '0']
-- [fir_filter_xxx_0_1, '0', qtgui_time_sink_x_0, '0']
+- [fir_filter_xxx_0, '0', audio_sink_0, '0']
+- [fir_filter_xxx_0, '0', qtgui_freq_sink_x_0, '0']
+- [fir_filter_xxx_0, '0', qtgui_time_sink_x_0, '0']
 
 metadata:
   file_format: 1
-  grc_version: 3.10.11.0
+  grc_version: 3.10.9.2

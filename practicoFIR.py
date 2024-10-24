@@ -3,16 +3,16 @@ import matplotlib.pyplot as plt
 from scipy.signal import firwin, freqz
 
 # Parámetros de diseño
-fs = 48000  # Frecuencia de muestreo en Hz
+fs = 24000  # Frecuencia de muestreo en Hz
 numtaps = 101  # Número de coeficientes (orden del filtro)
-lowcut = 1500.0  # Frecuencia inferior de la banda eliminada
-highcut = 2300.0  # Frecuencia superior de la banda eliminada
+lowcut = 1170.0  # Frecuencia inferior de la banda eliminada
+highcut = 1230.0  # Frecuencia superior de la banda eliminada
 
 # Diseño del filtro FIR de banda eliminada
-filtro = firwin(numtaps, [lowcut, highcut], pass_zero='bandstop', fs=fs)
+filtro = firwin(numtaps, [lowcut, highcut], pass_zero=False, fs=fs)
 
 #Guardar los coeficientes del filtro en archivo.txt 
-with open('coeficientes_filtro_FIR.txt', 'w') as f:
+with open('NicoTaps.txt', 'w') as f:
     # Crear una cadena de texto con los coeficientes separados por comas
     coef_string = ', '.join(f'{coef:.10f}' for coef in filtro)
     # Escribir la cadena en el archivo
