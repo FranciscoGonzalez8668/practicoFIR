@@ -1,39 +1,27 @@
-import numpy as np
-import scipy.signal as signal
+from scipy.signal import firwin, freqz
 import matplotlib.pyplot as plt
+import numpy as np
 
-# Frecuencia de muestreo (en Hz)
-fs = 10000
+# Parámetros del filtro
+fs = 22050  # Frecuencia de muestreo (Hz)
+cutoff = [1500, 2300]  # Frecuencias de corte (Hz)
+numtaps = 101  # Número de coeficientes del filtro (longitud FIR)
 
-# Frecuencia de corte (en Hz)
-f1 = 1500  # Frecuencia baja (0V)
-f2 = 2500  # Frecuencia alta (1V)
-f3 = 3000  # Frecuencia donde se debe volver a 0V
+# Diseño del filtro de banda eliminada
+fir_coeff = firwin(numtaps, cutoff, fs=fs, pass_zero=True)
 
-# Frecuencias normalizadas (dividir entre fs/2)
-frequencies = [0, f1/(fs/2), f2/(fs/2), f3/(fs/2), 1]
-
-# Ganancias deseadas en cada banda:
-# 0 para frecuencias menores a f1
-# 1 para frecuencias entre f1 y f2
-# 0 para frecuencias mayores a f3
-gains = [0, 0, 1, 0, 0]
-
-# Número de coeficientes (orden del filtro FIR)
-num_taps = 101
-
-# Calcular los coeficientes del filtro FIR
-fir_coefficients = signal.firwin2(num_taps, frequencies, gains)
+# Frecuencia de respuesta
+w, h = freqz(fir_coeff, worN=8000)
 
 # Guardar los coeficientes en un archivo .txt
 with open('fir_taps.txt', 'w') as f:
-    f.write(','.join(map(str, fir_coefficients)))
+    f.write(','.join(map(str, fir_coeff)))
 
-# Visualizar la respuesta en frecuencia
-w, h = signal.freqz(fir_coefficients, worN=8000)
-plt.plot(0.5 * fs * w / np.pi, np.abs(h), 'b')
-plt.title("Respuesta en frecuencia del filtro FIR")
+
+# Gráfico de la respuesta del filtro
+plt.plot(0.5*fs*w/np.pi, np.abs(h), 'b')
+plt.title('Respuesta de Frecuencia del Filtro FIR')
 plt.xlabel('Frecuencia (Hz)')
-plt.ylabel('Amplitud')
+plt.ylabel('Ganancia')
 plt.grid()
 plt.show()
