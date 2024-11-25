@@ -8,7 +8,7 @@ cutoff = [1500, 2300]  # Frecuencias de corte (Hz)
 numtaps = 101  # Número de coeficientes del filtro (longitud FIR)
 
 # Diseño del filtro de banda eliminada
-fir_coeff = firwin(numtaps, cutoff, fs=fs, pass_zero=True)
+fir_coeff = firwin(numtaps, cutoff, fs=fs, pass_zero=False)
 
 # Frecuencia de respuesta
 w, h = freqz(fir_coeff, worN=8000)
@@ -25,3 +25,5 @@ plt.xlabel('Frecuencia (Hz)')
 plt.ylabel('Ganancia')
 plt.grid()
 plt.show()
+
+#funcion para hacer fibonachi
