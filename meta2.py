@@ -14,8 +14,9 @@ fir_coeff = firwin(numtaps, cutoff, fs=fs, pass_zero=False)
 w, h = freqz(fir_coeff, worN=8000)
 
 # Guardar los coeficientes en un archivo .txt
-with open('fir_taps.txt', 'w') as f:
-    f.write(','.join(map(str, fir_coeff)))
+print(fir_coeff)
+with open('taps2.txt', 'w') as f:
+    f.write(','.join(map(str,fir_coeff)))
 
 
 # Gráfico de la respuesta del filtro
